@@ -1,22 +1,16 @@
 #include <stdio.h> 
 #include <stdlib.h>
+#include <string.h> 
 
 int wc() {
-    int count = 1; 
-    char buf[32]; 
-    fgets(buf, sizeof(buf), stdin);
-    for(int i = 0; i < sizeof(buf); i++) {
-        if(buf[i] == ' ') {
-            count++;
-        }
-    }
+    int count_words = 1; 
+    int count_lines = 0;
+    int count_bytes = 8;
+    char buf[2]; 
 
     while(1) {
-        printf("%s", buf);
-
         if(fgets(buf, sizeof(buf), stdin) == NULL) {
             if(feof(stdin)) {
-                printf("breaks at feof\n");
                 break;
             } else {
                 perror("Error: fgets failed in some kind of way. Aborting. \n");
@@ -24,15 +18,15 @@ int wc() {
             }
         }
         for(int i = 0; i < sizeof(buf); i++) {
-                if(buf[i] == ' ' || buf[i] == '\n') {
-                count++;
+            if(buf[i] == '\n') {
+                count_lines++;
             }
         }
     }
     
-    printf("%d\n", count);
+    printf("lines: %d; words: %d; bytes: %d\n", count_lines, count_words, count_bytes);
 
-    return count;
+    return count_words;
 }
 
 int main() {
