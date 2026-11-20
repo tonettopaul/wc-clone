@@ -1,12 +1,14 @@
 #include <stdio.h> 
 #include <stdlib.h>
-#include <string.h> 
+#include <wctype.h>
+#include <string.h>
 
 int wc() {
-    int count_words = 1; 
+    int count_words = 0; 
     int count_lines = 0;
     int count_bytes = 8;
-    char buf[2]; 
+    char buf[2];
+    char tmp[2];
 
     while(1) {
         if(fgets(buf, sizeof(buf), stdin) == NULL) {
@@ -18,9 +20,13 @@ int wc() {
             }
         }
         for(int i = 0; i < sizeof(buf); i++) {
+            if(iswspace(buf[i]) && ! iswspace(tmp[i])) {
+                count_words++;
+            }
             if(buf[i] == '\n') {
                 count_lines++;
             }
+            strcpy(tmp, buf);
         }
     }
     
