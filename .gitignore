@@ -1,0 +1,5 @@
+*.o
+*.h
+wc-clone
+.vscode/
+.DS_Store
