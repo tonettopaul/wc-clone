@@ -3,7 +3,7 @@
 #include <wctype.h>
 #include <string.h>
 
-int wc() {
+int wc(void) {
     int count_words = 0; 
     int count_lines = 0;
     int count_bytes = 0;
@@ -22,7 +22,7 @@ int wc() {
                 exit(EXIT_FAILURE);
             }
         }
-        for(int i = 0; i < sizeof(buf); i++) {
+        for(size_t i = 0; i < sizeof(buf); i++) {
             if(iswspace(buf[i]) && !iswspace(tmp[i])) {
                 count_words++;
             }
@@ -39,7 +39,7 @@ int wc() {
     return count_words;
 }
 
-int main() {
+int main(void) {
     wc();
     return 1;
 }
